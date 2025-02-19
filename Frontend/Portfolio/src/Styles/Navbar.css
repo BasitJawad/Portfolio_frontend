@@ -1,0 +1,25 @@
+/* .Main-navlist{
+    display: grid;
+    grid-template-columns: repeat(2,1fr); 
+    place-items: center;
+
+}
+.navlist{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+
+
+@media screen and (max-width: 640px ) {
+.navlist{
+    display: none ;
+}
+.menu{
+
+}
+} */

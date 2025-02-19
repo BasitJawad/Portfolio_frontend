@@ -3,7 +3,9 @@ import React from 'react'
 const HomePage = () => {
   return (
     <div>
-      HomePage
+      <div className="HeroSection"></div>
+      <div className="SkillsSection"></div>
+      <div className="CobeVercelSection"></div>
     </div>
   )
 }
