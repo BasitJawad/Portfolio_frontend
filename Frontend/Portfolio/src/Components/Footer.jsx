@@ -5,7 +5,7 @@ const Footer = () => {
   
   return (
     <div className={FooterStyle}> 
-      <h1>Developed by Basit Jawad</h1>
+      <h1 className='text-2xl select-none'>Developed by <span className='tracking-wider text-purple-400'>Basit</span> <span className='tracking-wide text-blue-400'>Jawad</span></h1>
     </div>
   )
 }

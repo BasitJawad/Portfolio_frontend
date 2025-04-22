@@ -1,13 +1,13 @@
 import { createRoot } from 'react-dom/client'
+import {Provider} from "react-redux"
 import './index.css'
 import App from './App.jsx'
 import "./App.css"
-import LoginContextProvider from './Context/LoginContextProvider.jsx'
+import {store} from "./Redux/Store.jsx"
 createRoot(document.getElementById('root')).render(
   <>
-    <LoginContextProvider>
-    <App />
-    </LoginContextProvider>
-  
+  <Provider store={store}>
+      <App />
+  </Provider>
   </>,
 )

@@ -4,5 +4,10 @@
  box-sizing: border-box;
 }
 body{
-    background: url("../public/Screenshot\ from\ 2025-02-14\ 21-56-46.png");
+    background-color: #111827;
+}
+.SkillsBoxes .SkillsContainer div{
+    width: 100%;
+    height: 90%;
+    border: 1px solid white;
 }

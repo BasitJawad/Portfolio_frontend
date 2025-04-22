@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+pre {
+    background-color: #1e293b !important; /* Ensures consistent dark mode */
+    padding: 1rem;
+    border-radius: 8px;
+    overflow-x: auto;
+  }
+  code {
+    background-color: transparent !important;
+  }
+  

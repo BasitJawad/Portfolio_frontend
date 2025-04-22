@@ -1,17 +1,18 @@
-import React,{useContext} from 'react'
-import {createBrowserRouter, RouterProvider, Navigate} from "react-router-dom"
+import React from 'react'
+import {createBrowserRouter, RouterProvider, useNavigate} from "react-router-dom"
 import MainLayout from './Layout/MainLayout.jsx'
 import Blogs from "./Pages/Blogs.jsx"
 import Projects from "./Pages/Projects.jsx"
 import HomePage from "./Pages/HomePage.jsx"
 import Login from './Pages/Login.jsx'
 import NoPage from './Pages/NoPage.jsx'
+import ProjectDetails from "./Pages/ProjectDetails.jsx"
 import AdminPage from './Pages/AdminPage.jsx'
-import { LoginContext } from './Context/LoginContextProvider.jsx'
+import ProtectedRoute from './Components/ProtectedRoute.jsx'
+import SignUp from './Pages/SignUp.jsx'
+
+
 const App = () => {
-
-  const isAuthenticated = useContext(LoginContext)
-
   const Routes = createBrowserRouter([
     {
      path: "/",
@@ -21,21 +22,30 @@ const App = () => {
         path: "/",
         element:<HomePage />
       },
-      {
-        path: "Blogs",
-        element: <Blogs />
-      },
+      // {
+      //   path: "Blogs",
+      //   element: <Blogs />
+      // },
       {
         path: "Projects",
         element: <Projects/>
       },
       {
-        path: "BasitLoginAccess",
-        element:<Login  />
+        path:"Projects/:id",
+        element: <ProjectDetails/>
+          },
+      {
+        path: "Login",
+        element: <Login />
       },
+      // {
+      //   path: "SignUp",
+      //   element:<SignUp />
+      // }
+      
       {
         path:"AdminPage",
-        element: isAuthenticated ? <AdminPage/> : <Login /> 
+       element: <ProtectedRoute><AdminPage /></ProtectedRoute> 
       },
       {
         path:"*",
