@@ -48,7 +48,7 @@ const Projects = () => {
           )}
 
           {/* Projects Display */}
-          {!isLoading && !hasError && projects.length > 0 && projects.map((project) => (
+          {!isLoading && !hasError && projects.length > 0 && [...projects].reverse().map((project) => (
             <Atropos
               key={project._id}
               shadow={false}
