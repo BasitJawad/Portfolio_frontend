@@ -52,6 +52,7 @@ const ProjectDetails = () => {
             a: (props) => (
               <a
                 className="text-blue-400 hover:text-purple-600 transition-all duration-200"
+                style={{ wordBreak: 'break-word' }}
                 {...props}
               />
             ),
