@@ -48,64 +48,72 @@ const Projects = () => {
           )}
 
           {/* Projects Display */}
-          {!isLoading && !hasError && projects.length > 0 && [...projects].reverse().map((project) => (
-            <Atropos
-              key={project._id}
-              shadow={false}
-              style={{ background: "transparent", marginTop: "20px" }}
-              rotateXMax={1}
-              rotateYMax={1}
-              activeOffset={2}
-              duration={400}
-            >
-              <div
-                onClick={async () => {
-                  try {
-                    await axios.put(`${import.meta.env.VITE_API_BASE_URL}/api/projects/views/${project._id}`);
-                    navigate(`/projects/${project._id}`);
-                  } catch (error) {
-                    console.error("Failed to update views", error);
-                  }
-                }}
-                className="relative w-[60vw] bg-gradient-to-t from-[#121212] to-[#1B1B1B] md:rounded-lgl rounded-lg p-5 cursor-pointer transition-transform hover:scale-[1.01] hover:shadow-lg hover:shadow-purple-500/20"
-              >
-                {/* Title and Date */}
-                <div className="flex justify-between items-center mb-2">
-                  <h2 className="text-xl md:text-2xl font-semibold text-white truncate">
-                    {project.projectTitle}
-                  </h2>
-                  <span className="text-sm text-[#F87171] whitespace-nowrap">
-                    {new Date(project.projectDate).toLocaleDateString()}
-                  </span>
-                </div>
+          {!isLoading && !hasError && projects.length > 0 && [...projects].reverse().map((project, index) => (
+  <Atropos
+    key={project._id}
+    shadow={false}
+    style={{ background: "transparent", marginTop: "20px" }}
+    rotateXMax={1}
+    rotateYMax={1}
+    activeOffset={2}
+    duration={400}
+  >
+    <div
+      onClick={async () => {
+        try {
+          await axios.put(`${import.meta.env.VITE_API_BASE_URL}/api/projects/views/${project._id}`);
+          navigate(`/projects/${project._id}`);
+        } catch (error) {
+          console.error("Failed to update views", error);
+        }
+      }}
+      className="relative w-[60vw] bg-gradient-to-t from-[#121212] to-[#1B1B1B] md:rounded-lgl rounded-lg p-5 cursor-pointer transition-transform hover:scale-[1.01] hover:shadow-lg hover:shadow-purple-500/20"
+    >
+      {/* "LATEST" badge */}
+      {index === 0 && (
+        <div className="absolute top-2 left-2 bg-gradient-to-r from-purple-500 to-blue-500 text-white text-xs font-semibold px-2 py-1 rounded-md shadow-md">
+          LATEST
+        </div>
+      )}
 
-                {/* Markdown Description (clamped) */}
-                <div className="line-clamp-3 text-sm text-gray-300">
-                  <Markdown
-                    remarkPlugins={[remarkGfm]}
-                    rehypePlugins={[rehypeRaw]}
-                    components={{
-                      h1: () => null,
-                      h2: () => null,
-                      h3: () => null,
-                      h4: () => null,
-                      h5: () => null,
-                      h6: () => null,
-                      ol: (props) => <ol className="list-decimal ml-6 text-[#ffffff]" {...props} />,
-                      p: (props) => <p className="text-sm text-gray-300" {...props} />,
-                    }}
-                  >
-                    {project.projectDescription}
-                  </Markdown>
-                </div>
+      {/* Title and Date */}
+      <div className="flex justify-between items-center mb-2">
+        <h2 className="text-xl md:text-2xl font-semibold text-white truncate">
+          {project.projectTitle}
+        </h2>
+        <span className="text-sm text-[#F87171] whitespace-nowrap">
+          {new Date(project.projectDate).toLocaleDateString()}
+        </span>
+      </div>
 
-                {/* Views */}
-                <div className="absolute bottom-2 right-4 text-sm text-[#9CA3AF]">
-                  👁️ {project.projectViews} views
-                </div>
-              </div>
-            </Atropos>
-          ))}
+      {/* Markdown Description */}
+      <div className="line-clamp-3 text-sm text-gray-300">
+        <Markdown
+          remarkPlugins={[remarkGfm]}
+          rehypePlugins={[rehypeRaw]}
+          components={{
+            h1: () => null,
+            h2: () => null,
+            h3: () => null,
+            h4: () => null,
+            h5: () => null,
+            h6: () => null,
+            ol: (props) => <ol className="list-decimal ml-6 text-[#ffffff]" {...props} />,
+            p: (props) => <p className="text-sm text-gray-300" {...props} />,
+          }}
+        >
+          {project.projectDescription}
+        </Markdown>
+      </div>
+
+      {/* Views */}
+      <div className="absolute bottom-2 right-4 text-sm text-[#9CA3AF]">
+        👁️ {project.projectViews} views
+      </div>
+    </div>
+  </Atropos>
+))}
+
 
           {/* No Projects */}
           {!isLoading && !hasError && projects.length === 0 && (
