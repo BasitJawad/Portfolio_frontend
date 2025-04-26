@@ -5,7 +5,7 @@ import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProjects } from "../Redux/Slicers/projectSlice";
-import github from "../assets/github.png"
+// import github from "../assets/github.png"
 const ProjectDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -56,7 +56,26 @@ const ProjectDetails = () => {
                 {...props}
               />
             ),
+            code({ node, inline, className, children, ...props }) {
+              const match = /language-(\w+)/.exec(className || '');
+              return !inline && match ? (
+                <SyntaxHighlighter
+                  style={atomOneDark}
+                  language={match[1]}
+                  PreTag="div"
+                  className="rounded-lg overflow-x-auto my-4"
+                  {...props}
+                >
+                  {String(children).replace(/\n$/, '')}
+                </SyntaxHighlighter>
+              ) : (
+                <code className="bg-gray-800 text-gray-200 px-1 rounded" {...props}>
+                  {children}
+                </code>
+              );
+            },
           }}
+          
         >
 {`# ${project.projectTitle}\n\n Github: ${project.projectGithubLink}${project.projectDescription}
 `}
